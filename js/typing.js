@@ -248,19 +248,68 @@ function skipTyping() {
 }
 
 /**
+ * Types text into a target element with typewriter effect
+ * @param {string} text - Text to type
+ * @param {HTMLElement} target - Target element to render into
+ * @param {Object} options - Typing options
+ * @param {number} options.speed - Characters per millisecond
+ * @param {Function} options.onComplete - Callback when finished
+ * @param {Function} options.onChar - Callback per character
+ * @returns {Promise<void>}
+ */
+function typeWriter(text, target, options = {}) {
+    return new Promise((resolve) => {
+        if (!target) {
+            resolve();
+            return;
+        }
+        
+        // Resolve any previous pending promise
+        if (TypingEngine.resolve) {
+            TypingEngine.resolve();
+            TypingEngine.resolve = null;
+        }
+        
+        // Stop any existing typing
+        stopTyping();
+        
+        // Clear target content
+        target.textContent = '';
+        
+        // Setup typing state
+        TypingEngine.fullText = text;
+        TypingEngine.target = target;
+        TypingEngine.currentText = '';
+        TypingEngine.currentIndex = 0;
+        TypingEngine.currentSpeed = options.speed ?? TypingConfig.speed;
+        TypingEngine.onChar = options.onChar || null;
+        TypingEngine.onComplete = options.onComplete || null;
+        TypingEngine.resolve = resolve;
+        TypingEngine.isTyping = true;
+        TypingEngine.isPaused = false;
+        TypingEngine.timeoutId = null;
+        
+        // Start typing
+        typeNextChar();
+    });
+}
+
+/**
  * Types a scene's text content
- * @param {Object} scene - Scene object containing text and target
- * @param {string} scene.text - Text to type
+ * @param {Object} scene - Scene object containing message and target
+ * @param {string} scene.message - Text to type (story uses 'message' not 'text')
  * @param {string} scene.target - CSS selector for target element
  * @param {Object} options - Typing options
  * @returns {Promise<void>}
  */
 async function typeScene(scene, options = {}) {
-    if (!scene || !scene.text) {
+    // Use 'message' property from story.js, not 'text'
+    if (!scene || !scene.message) {
         return;
     }
     
-    const targetSelector = scene.target || '#scene-text';
+    // Use the correct target selector from HTML
+    const targetSelector = scene.target || '#scene-content';
     // Use utils.qs if available, otherwise fallback to document.querySelector
     const target = (typeof qs === 'function') 
         ? qs(targetSelector) 
@@ -270,7 +319,7 @@ async function typeScene(scene, options = {}) {
         return;
     }
     
-    await typeWriter(scene.text, target, options);
+    await typeWriter(scene.message, target, options);
 }
 
 /**
