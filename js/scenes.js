@@ -57,24 +57,27 @@ async function safeSleep(ms) {
 }
 
 /**
- * Updates the progress bar
+ * Updates the progress bar directly
  * @param {Object} scene - Scene object containing progress
  */
 function updateProgress(scene) {
-    if (scene && typeof scene.progress === 'number') {
-        if (typeof setProgress === 'function') {
-            setProgress(scene.progress);
-        }
+    if (!scene) return;
+    
+    const progressBar = document.getElementById('progress-bar');
+    if (progressBar && typeof scene.progress === 'number') {
+        const clampedProgress = Math.min(Math.max(scene.progress, 0), 100);
+        progressBar.style.width = clampedProgress + '%';
     }
 }
 
 /**
- * Updates the primary button text
+ * Updates the primary button text directly
  * @param {Object} scene - Scene object containing button text
  */
 function updateButton(scene) {
-    if (typeof setButton === 'function') {
-        setButton(scene?.button || 'Continue');
+    const button = document.getElementById('primary-button');
+    if (button) {
+        button.textContent = scene?.button || 'Continue';
     }
 }
 
@@ -92,6 +95,7 @@ function playSceneAudio(scene) {
         case 'danger':
             if (typeof playError === 'function') playError();
             break;
+        case 'info':
         case 'warning':
         case 'default':
         default:
@@ -120,9 +124,10 @@ function playSceneEffect(scene) {
                 pulse(target);
             }
             break;
+        case 'info':
         case 'default':
         default:
-            // No effect for default
+            // No effect for info/default
             break;
     }
 }
@@ -137,6 +142,19 @@ async function printLogs(scene) {
     for (const log of scene.logs) {
         safeLog(log);
         await safeSleep(100);
+    }
+}
+
+/**
+ * Displays the scene title
+ * @param {Object} scene - Scene object containing title
+ */
+function displaySceneTitle(scene) {
+    if (!scene) return;
+    
+    const titleElement = document.getElementById('scene-title');
+    if (titleElement) {
+        titleElement.textContent = scene.title || '';
     }
 }
 
@@ -183,6 +201,9 @@ async function showScene(index) {
         // Update current index before rendering
         SceneManager.currentIndex = index;
         
+        // Display scene metadata
+        displaySceneTitle(scene);
+        
         // Update UI elements
         updateProgress(scene);
         updateButton(scene);
@@ -199,8 +220,8 @@ async function showScene(index) {
         // Print logs if present
         await printLogs(scene);
         
-        // Handle final scene
-        if (scene.final === true) {
+        // Handle final scene - check if this is the last scene
+        if (index === SceneManager.total - 1) {
             if (typeof launchConfetti === 'function') {
                 launchConfetti();
             }
