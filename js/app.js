@@ -50,8 +50,6 @@ function checkDependencies() {
         { name: 'typeScene', check: () => typeof typeScene === 'function' },
         { name: 'clearTyping', check: () => typeof clearTyping === 'function' },
         { name: 'transitionScreen', check: () => typeof transitionScreen === 'function' },
-        { name: 'setProgress', check: () => typeof setProgress === 'function' },
-        { name: 'setButton', check: () => typeof setButton === 'function' },
         { name: 'playBeep', check: () => typeof playBeep === 'function' },
         { name: 'playSuccess', check: () => typeof playSuccess === 'function' },
         { name: 'playError', check: () => typeof playError === 'function' },
