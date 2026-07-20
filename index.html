@@ -1,1 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Investigation</title>
+
+    <meta name="theme-color"
+          content="#050816">
+
+    <meta name="description"
+          content="A Special Interactive Experience">
+
+    <link rel="icon"
+          href="favicon.ico">
+
+    <!-- Fonts -->
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <link rel="stylesheet"
+          href="css/animation.css">
+
+    <link rel="stylesheet"
+          href="css/responsive.css">
+
+</head>
+
+<body>
+
+    <!-- Background -->
+    <div id="background"></div>
+
+    <!-- Floating Effects -->
+    <div id="effects"></div>
+
+    <!-- Main App -->
+    <main id="app">
+
+        <!-- Screen Container -->
+        <section id="screen">
+
+            <!-- Scene Title -->
+            <h1 id="scene-title"></h1>
+
+            <!-- Scene Text -->
+            <div id="scene-content"></div>
+
+            <!-- Progress -->
+            <div id="progress-wrapper">
+
+                <div id="progress-bar"></div>
+
+            </div>
+
+            <!-- Buttons -->
+            <div id="button-group">
+
+                <button id="primary-button">
+                    Continue
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loader">
+
+        <div class="loader-box">
+
+            <div class="loader-spinner"></div>
+
+            <p id="loader-text">
+                Initializing...
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Toast Messages -->
+    <div id="toast"></div>
+
+    <!-- Audio -->
+    <audio id="beep"
+           preload="auto"></audio>
+
+    <audio id="success"
+           preload="auto"></audio>
+
+    <audio id="error"
+           preload="auto"></audio>
+
+    <!-- JavaScript -->
+
+    <script src="config.js"></script>
+
+    <script src="data/story.js"></script>
+
+    <script src="js/utils.js"></script>
+
+    <script src="js/typing.js"></script>
+
+    <script src="js/animations.js"></script>
+
+    <script src="js/confetti.js"></script>
+
+    <script src="js/sounds.js"></script>
+
+    <script src="js/scenes.js"></script>
+
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
