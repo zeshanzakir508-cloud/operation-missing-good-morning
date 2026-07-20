@@ -10,7 +10,7 @@
 'use strict';
 
 /**
- * Scene Manager - Controls story flow and rendering
+ * Scene Manager Runtime State - Controls story flow and rendering
  * @namespace SceneManager
  */
 const SceneManager = {
@@ -24,7 +24,7 @@ const SceneManager = {
     eventsBound: false
 };
 
-// Prevent accidental property additions
+// Prevent accidental property additions but allow runtime updates
 Object.seal(SceneManager);
 
 /**
@@ -32,7 +32,7 @@ Object.seal(SceneManager);
  * @returns {boolean} True if scenes exist
  */
 function hasScenes() {
-    return Array.isArray(STORY) && STORY.length > 0;
+    return typeof STORY !== 'undefined' && Array.isArray(STORY) && STORY.length > 0;
 }
 
 /**
@@ -54,24 +54,6 @@ async function safeSleep(ms) {
     if (typeof sleep === 'function') {
         await sleep(ms);
     }
-}
-
-/**
- * Gets the current scene object
- * @returns {Object|null} Current scene or null if invalid
- */
-function currentScene() {
-    if (!hasScenes()) {
-        safeLog('STORY is not available or empty');
-        return null;
-    }
-    
-    if (SceneManager.currentIndex < 0 || SceneManager.currentIndex >= SceneManager.total) {
-        safeLog('Invalid scene index: ' + SceneManager.currentIndex);
-        return null;
-    }
-    
-    return STORY.at(SceneManager.currentIndex) ?? null;
 }
 
 /**
@@ -133,8 +115,9 @@ function playSceneEffect(scene) {
             if (typeof successAnimation === 'function') successAnimation();
             break;
         case 'warning':
-            if (typeof pulse === 'function' && UI?.screen) {
-                pulse(UI.screen);
+            if (typeof pulse === 'function') {
+                const target = document.getElementById('screen') || document.body;
+                pulse(target);
             }
             break;
         case 'default':
@@ -191,7 +174,10 @@ async function showScene(index) {
         
         // Transition screen
         if (typeof transitionScreen === 'function') {
-            await transitionScreen();
+            const screen = document.getElementById('screen');
+            if (screen) {
+                await transitionScreen(screen);
+            }
         }
         
         // Update current index before rendering
@@ -336,6 +322,9 @@ async function handlePrimaryButton() {
  * @returns {Promise<void>}
  */
 async function handleKeyboard(event) {
+    // Ignore key repeats to prevent accidental multiple navigations
+    if (event.repeat) return;
+    
     // Ignore input while rendering
     if (SceneManager.rendering) return;
     
