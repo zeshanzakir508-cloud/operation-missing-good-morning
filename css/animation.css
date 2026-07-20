@@ -1,1 +1,563 @@
+/* ===========================================================
+   Operation Missing Good Morning
+   Animation Stylesheet
+   Version : 1.0
+=========================================================== */
 
+
+/* ========= FADE ========= */
+
+.fade-in{
+
+    animation:fadeIn .7s ease forwards;
+
+}
+
+.fade-out{
+
+    animation:fadeOut .5s ease forwards;
+
+}
+
+
+/* ========= ZOOM ========= */
+
+.zoom-in{
+
+    animation:zoomIn .45s ease forwards;
+
+}
+
+
+/* ========= SLIDE ========= */
+
+.slide-up{
+
+    animation:slideUp .6s ease forwards;
+
+}
+
+.slide-down{
+
+    animation:slideDown .6s ease forwards;
+
+}
+
+.slide-left{
+
+    animation:slideLeft .6s ease forwards;
+
+}
+
+.slide-right{
+
+    animation:slideRight .6s ease forwards;
+
+}
+
+
+/* ========= PULSE ========= */
+
+.pulse{
+
+    animation:pulse 2s infinite;
+
+}
+
+
+/* ========= GLOW ========= */
+
+.glow{
+
+    animation:glow 2.5s infinite;
+
+}
+
+
+/* ========= HEART ========= */
+
+.heartbeat{
+
+    animation:heartbeat 1.4s infinite;
+
+}
+
+
+/* ========= SHAKE ========= */
+
+.shake{
+
+    animation:shake .55s;
+
+}
+
+
+/* ========= FLOAT ========= */
+
+.float{
+
+    animation:float 4s ease-in-out infinite;
+
+}
+
+
+/* ========= ROTATE ========= */
+
+.rotate{
+
+    animation:rotate 1.5s linear infinite;
+
+}
+
+
+/* ========= BLINK ========= */
+
+.blink{
+
+    animation:blink 1s infinite;
+
+}
+
+
+/* ========= PROGRESS ========= */
+
+.progress-animation{
+
+    transition:width .8s ease;
+
+}
+
+
+/* ========= BUTTON ========= */
+
+#primary-button{
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        background .25s;
+
+}
+
+#primary-button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+#primary-button:active{
+
+    transform:scale(.97);
+
+}
+
+
+/* ========= CARD ========= */
+
+#screen{
+
+    transition:
+        transform .45s,
+        opacity .45s;
+
+}
+
+
+/* ========= TOAST ========= */
+
+.toast-show{
+
+    animation:toastShow .35s ease forwards;
+
+}
+
+.toast-hide{
+
+    animation:toastHide .35s ease forwards;
+
+}
+
+
+/* ========= LOADER ========= */
+
+.loader-spinner{
+
+    animation:rotate 1s linear infinite;
+
+}
+
+
+/* ===========================================================
+                        KEYFRAMES
+=========================================================== */
+
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:1;
+
+    }
+
+}
+
+
+@keyframes fadeOut{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+
+@keyframes zoomIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.8);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+@keyframes slideUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+
+@keyframes slideDown{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+
+@keyframes slideRight{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-50px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+
+@keyframes pulse{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    50%{
+
+        transform:scale(1.05);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+@keyframes glow{
+
+    0%{
+
+        box-shadow:
+            0 0 0 rgba(59,130,246,.1);
+
+    }
+
+    50%{
+
+        box-shadow:
+            0 0 30px rgba(59,130,246,.35);
+
+    }
+
+    100%{
+
+        box-shadow:
+            0 0 0 rgba(59,130,246,.1);
+
+    }
+
+}
+
+
+@keyframes heartbeat{
+
+    0%{
+
+        transform:scale(1);
+
+    }
+
+    15%{
+
+        transform:scale(1.08);
+
+    }
+
+    30%{
+
+        transform:scale(1);
+
+    }
+
+    45%{
+
+        transform:scale(1.08);
+
+    }
+
+    100%{
+
+        transform:scale(1);
+
+    }
+
+}
+
+
+@keyframes shake{
+
+    0%{
+
+        transform:translateX(0);
+
+    }
+
+    20%{
+
+        transform:translateX(-8px);
+
+    }
+
+    40%{
+
+        transform:translateX(8px);
+
+    }
+
+    60%{
+
+        transform:translateX(-6px);
+
+    }
+
+    80%{
+
+        transform:translateX(6px);
+
+    }
+
+    100%{
+
+        transform:translateX(0);
+
+    }
+
+}
+
+
+@keyframes float{
+
+    0%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-12px);
+
+    }
+
+    100%{
+
+        transform:translateY(0);
+
+    }
+
+}
+
+
+@keyframes rotate{
+
+    from{
+
+        transform:rotate(0deg);
+
+    }
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+
+@keyframes blink{
+
+    0%,100%{
+
+        opacity:1;
+
+    }
+
+    50%{
+
+        opacity:.25;
+
+    }
+
+}
+
+
+@keyframes toastShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateX(-50%)
+            translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes toastHide{
+
+    from{
+
+        opacity:1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+    to{
+
+        opacity:0;
+
+        transform:
+            translateX(-50%)
+            translateY(25px);
+
+    }
+
+}
